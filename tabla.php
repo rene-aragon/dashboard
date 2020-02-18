@@ -144,12 +144,14 @@
                                     <div class="table-data__tool-right">
                                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                             <select class="js-select2" name="type">
-                                                <option selected="selected">Export</option>
-                                                <option value="">Option 1</option>
-                                                <option value="">Option 2</option>
+                                                <option selected="selected">xls</option>
+                                                <!--option value="">abc</option-->
                                             </select>
                                             <div class="dropDownSelect2"></div>
                                         </div>
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" onclick="exportTable();">
+                                            <i class="zmdi"></i>Exportar
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +160,7 @@
                             <div class="col-md-12">
                                 <!-- DATA TABLE-->
                                 <div class="table-responsive table--no-card m-b-20">
-                                    <table class="table table-borderless table-striped table-earning text-center">
+                                    <table class="table table-borderless table-striped table-earning text-center" id="tablaRegistros">
                                         <thead>
                                             <tr>
                                                 <th>Fecha</th>
@@ -203,23 +205,22 @@
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
-    </script>
+    <script src="vendor/slick/slick.min.js"></script>
     <script src="vendor/wow/wow.min.js"></script>
     <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
-    </script>
+    <script src="vendor/counter-up/jquery.counterup.min.js"></script>
     <script src="vendor/circle-progress/circle-progress.min.js"></script>
     <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="vendor/select2/select2.min.js">
-    </script>
+    <script src="vendor/select2/select2.min.js"></script>
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+
+    <!-- Export Tables JS-->
+    <script src="js/tables.js"></script>
 
 </body>
 
