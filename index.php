@@ -216,7 +216,7 @@
                             <div class="col-lg-4">
                                 <div class="au-card m-b-20">
                                     <div class="au-card-inner">
-                                        <h3 class="title-2 m-b-40">CO2</h3>
+                                        <h3 class="title-2 m-b-40">CH4</h3>
                                         <canvas id="metano-chart"></canvas>
                                     </div>
                                 </div>
@@ -224,7 +224,7 @@
                             <div class="col-lg-4">
                                 <div class="au-card m-b-20 pb-sm-80">
                                     <div class="au-card-inner">
-                                        <h3 class="title-2 m-b-40">CH4</h3>
+                                        <h3 class="title-2 m-b-40">CO2</h3>
                                         <canvas id="carbono-chart"></canvas>
                                     </div>
                                 </div>

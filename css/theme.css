@@ -4573,7 +4573,7 @@ section {
 }
 
 .table-data__tool .table-data__tool-right > button {
-    margin-right: 12px;
+    margin-right: 0px;
 }
 
 @media (max-width: 991px) {
