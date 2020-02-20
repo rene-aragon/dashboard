@@ -58,15 +58,15 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li>
-                            <a href="index.html">
+                            <a href="index.php">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                        </li>        
+                        </li>
                         <li>
-                            <a href="tabla.html">
+                            <a href="tabla.php">
                                 <i class="fas fa-table"></i>Tablas</a>
                         </li>
                         <li>
-                            <a href="grafica.html">
+                            <a href="grafica.php">
                                 <i class="fas fa-chart-bar"></i>Graficas</a>
                         </li>
                     </ul>
@@ -86,15 +86,15 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li>
-                            <a href="index.html">
+                            <a href="index.php">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                        </li>        
+                        </li>
                         <li>
-                            <a href="tabla.html">
+                            <a href="tabla.php">
                                 <i class="fas fa-table"></i>Tablas</a>
                         </li>
                         <li>
-                            <a href="grafica.html">
+                            <a href="grafica.php">
                                 <i class="fas fa-chart-bar"></i>Graficas</a>
                         </li>
                     </ul>

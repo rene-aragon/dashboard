@@ -14640,16 +14640,25 @@ section {
     padding-left: 30px;
 }
 
-.end 
+.end
 {
     height: 0px;
     width: 100%;
 }
 
-@media (max-width: 992px) 
+@media (max-width: 992px)
 {
     .end
     {
         height: 80px;
     }
+}
+
+input[type='date']::-webkit-clear-button,
+input[type='date']::-webkit-inner-spin-button {
+    display: none;
+}
+input[type='time']::-webkit-clear-button,
+input[type='time']::-webkit-inner-spin-button {
+    display: none;
 }

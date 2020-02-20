@@ -123,23 +123,14 @@
                                 <div class="table-data__tool m-b-0">
                                     <div class="table-data__tool-left">
                                         <div class="rs-select2--light rs-select2--md">
-                                            <select class="js-select2" name="property">
-                                                <option selected="selected">All Properties</option>
-                                                <option value="">Option 1</option>
-                                                <option value="">Option 2</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
+                                            <input type="date" id="aDate" class="form-control">
                                         </div>
-                                        <div class="rs-select2--light rs-select2--sm">
-                                            <select class="js-select2" name="time">
-                                                <option selected="selected">Today</option>
-                                                <option value="">3 Days</option>
-                                                <option value="">1 Week</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
+                                        <div class="rs-select2--light rs-select2--xsm">
+                                            <input type="time" id="aTime" value="00:00" class="form-control">
                                         </div>
-                                        <button class="au-btn-filter">
-                                            <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                        <div class="rs-select2--light rs-select2--xsm">
+                                            <button class="btn btn-success" onclick="clearFilters('tBody');">Limpiar filtros</button>
+                                        </div>
                                     </div>
                                     <div class="table-data__tool-right">
                                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
@@ -170,7 +161,7 @@
                                                 <th>CH4</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tBody">
                                             <?php
                                               $date = "2020-02-14";
                                               $tmp  = $DB->getAllValuesOf("Sensor1",$date);
@@ -179,7 +170,7 @@
                                               $n = count(max($tmp,$ch4,$co2)) - 1;
                                               for($a=0; $a<$n; $a++)
                                               {
-                                                echo "<tr><td>$date</td><td>".date("h:i:s",strtotime($tmp[$a]['fecha']))."</td><td>".$tmp[$a]['valor']." °C</td><td>".$ch4[$a]['valor']." ppm</td><td>".$co2[$a]['valor']." ppm</td></tr>";
+                                                echo "<tr><td>$date</td><td>".date("h:i",strtotime($tmp[$a]['fecha']))."</td><td>".$tmp[$a]['valor']." °C</td><td>".$ch4[$a]['valor']." ppm</td><td>".$co2[$a]['valor']." ppm</td></tr>";
                                               }
                                             ?>
                                         </tbody>
