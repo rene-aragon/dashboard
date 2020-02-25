@@ -167,10 +167,10 @@
                                               $tmp  = $DB->getAllValuesOf("Sensor1",$date);
                                               $ch4  = $DB->getAllValuesOf("Sensor2",$date);
                                               $co2  = $DB->getAllValuesOf("Sensor3",$date);
-                                              $n = count(max($tmp,$ch4,$co2)) - 1;
+                                              $n = count(min($tmp,$ch4,$co2)) - 1;
                                               for($a=0; $a<$n; $a++)
                                               {
-                                                echo "<tr><td>$date</td><td>".date("h:i",strtotime($tmp[$a]['fecha']))."</td><td>".$tmp[$a]['valor']." °C</td><td>".$ch4[$a]['valor']." ppm</td><td>".$co2[$a]['valor']." ppm</td></tr>";
+                                                echo "<tr><td>".date("d-m-Y",strtotime($tmp[$a]['fecha']))."</td><td>".date("h:i",strtotime($tmp[$a]['fecha']))."</td><td>".$tmp[$a]['valor']." °C</td><td>".$ch4[$a]['valor']." ppm</td><td>".$co2[$a]['valor']." ppm</td></tr>";
                                               }
                                             ?>
                                         </tbody>

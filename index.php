@@ -42,11 +42,12 @@
 
     <!-- ChartJS -->
     <script src="js/charts.js"></script>
+    <script src="js/update.js"></script>
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
 
 </head>
 
-<body class="animsition">
+<body onload="updateAll();" class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -131,7 +132,7 @@
                                                 <i class="fas fa-temperature-low"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>
+                                                <h2 id="Sensor1">
                                                     <?php echo $DB->getLastValueOf("Sensor1")." °C"; ?>
                                                 </h2>
                                                 <span>Temperatura</span>
@@ -148,7 +149,7 @@
                                                 <i class="fas fa-flask"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>
+                                                <h2 id="Sensor2">
                                                     <?php echo $DB->getLastValueOf("Sensor2")." ppm"; ?>
                                                 </h2>
                                                 <span>CH4</span>
@@ -165,7 +166,7 @@
                                                 <i class="fas fa-flask"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>
+                                                <h2 id="Sensor3">
                                                     <?php echo $DB->getLastValueOf("Sensor3")." ppm"; ?>
                                                 </h2>
                                                 <span>CO2</span>
@@ -187,18 +188,8 @@
                                                 <th>CO2</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <?php
-                                              $n   = 5;
-                                              $tmp = $DB->getLastNValuesOf($n,"Sensor1");
-                                              $ch4 = $DB->getLastNValuesOf($n,"Sensor2");
-                                              $co2 = $DB->getLastNValuesOf($n,"Sensor3");
-
-                                              for($a=0; $a<$n; $a++)
-                                              {
-                                                echo "<tr><td></td><td>".$tmp[$a]['valor']." °C</td><td>".$ch4[$a]['valor']." ppm</td><td>".$co2[$a]['valor']." ppm</td></tr>";
-                                              }
-                                            ?>
+                                        <tbody id="db_tbody">
+                                            <?php echo $DB->getLastNValuesOf(5,"allsensors"); ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -209,7 +200,7 @@
                                 <div class="au-card m-b-20">
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-40">Temperatura</h3>
-                                        <canvas id="temp-chart"></canvas>
+                                        <canvas id="Sensor1-chart"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -217,7 +208,7 @@
                                 <div class="au-card m-b-20">
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-40">CH4</h3>
-                                        <canvas id="metano-chart"></canvas>
+                                        <canvas id="Sensor2-chart"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -225,15 +216,15 @@
                                 <div class="au-card m-b-20 pb-sm-80">
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-40">CO2</h3>
-                                        <canvas id="carbono-chart"></canvas>
+                                        <canvas id="Sensor3-chart"></canvas>
                                     </div>
                                 </div>
                             </div>
-                            <?php
+                            <!--?php
                                 $labelValues = ["13:00","13:30","14:00","14:30","15:00"];
 
                                 echo "<script type='text/javascript'> var dv_tmp =[]; var dv_ch4 = []; var dv_co2 = []; var lv = [];";
-                                for($a=0; $a<$n; $a++)
+                                for($a=0; $a<5; $a++)
                                 {
                                     echo 'dv_tmp['.$a.'] = "'.$tmp[$a]['valor'].'";';
                                     echo 'dv_ch4['.$a.'] = "'.$ch4[$a]['valor'].'";';
@@ -243,7 +234,7 @@
                                 echo "updateChart(\"temp-chart\",lv,dv_tmp);";
                                 echo "updateChart(\"metano-chart\",lv,dv_ch4);";
                                 echo "updateChart(\"carbono-chart\",lv,dv_co2);</script>";
-                            ?>
+                            ?-->
                         </div>
                         <div class="end">
                         </div>
