@@ -19,6 +19,10 @@
       echo $DB->getChartValues(5,$p);
     break;
 
+    case 3:
+      echo $DB->getValuesByDate($p);
+    break;
+
     default:
       echo "error";
     break;

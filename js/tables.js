@@ -1,3 +1,4 @@
+$("#moreFilters").hide();
 function exportTable()
 {
     var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
@@ -8,7 +9,6 @@ function exportTable()
     for(j = 0 ; j < tab.rows.length ; j++)
     {
       tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
-      //tab_text=tab_text+"</tr>";
     }
 
     tab_text=tab_text+"</table>";
@@ -27,56 +27,75 @@ function exportTable()
       txtArea1.focus();
       sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
     }
-    else                 //other browser not tested on IE 11
-    sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+    else
+      sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
 
 
     return (sa);
   }
 
+  $("#moreFiltersButton").click(function()
+  {
+    $("#moreFilters").toggle("slow");
+  });
+
   $( document ).ready(function()
   {
     document.getElementById('aDate').valueAsDate = new Date();
+    document.getElementById('dateChackbox').style.visibility = "hidden";
+    tableFilter();
   });
 
-  $("#aDate").change(function ()
+  function tableFilter()
   {
     element = document.getElementById("aDate");
-    value   = element.value;
-    filter(value,"tBody",0);
-  });
-
-  $("#aTime").change(function ()
-  {
+    aDate = element.value;
     element = document.getElementById("aTime");
-    value   = element.value;
-    filter(value,"tBody",1);
-  });
+    aTime = (element.value=="") ? "00:00" : element.value;
+    element = document.getElementById("bDate");
+    bDate = (element.value=="") ? aDate : element.value;
+    element = document.getElementById("bTime");
+    bTime = (element.value=="") ? "23:59" : element.value;
 
-  function filter(value,idTable,rowIndex)
-  {
-    table = document.getElementById(idTable);
-    tr = table.getElementsByTagName("tr");
+    query = "SELECT * FROM sensores WHERE fecha BETWEEN '"+aDate+" "+aTime+"' AND '"+bDate+" "+bTime+"'";
 
-    for (a = 0; a < tr.length; a++)
+    if(document.getElementById('dateChackbox').checked)
+      query += " AND CAST(fecha AS TIME) = '"+aTime+":00'";
+
+    if(aTime == bTime)
     {
-        e = tr[a].getElementsByTagName("td")[rowIndex];
-        v = e.innerHTML;
-
-        if(v == value)
-          tr[a].style.display = "";
-        else
-          tr[a].style.display = "none";
+      document.getElementById('dateChackbox').style.visibility = "visible";
+      document.getElementById('labelChackbox').innerHTML = "Sólo registros de "+aTime;
     }
+    else
+    {
+      document.getElementById('dateChackbox').checked = false;
+      document.getElementById('dateChackbox').style.visibility = "hidden";
+      document.getElementById('labelChackbox').innerHTML = "";
+    }
+
+    var req = new XMLHttpRequest();
+
+    req.onreadystatechange = function()
+    {
+      if (req.readyState == 4 && req.status == 200)
+        document.getElementById("mainTable").innerHTML = req.responseText;
+    }
+
+    req.open('GET', 'content.php?f=3&p='+query, true);
+    req.send();
   }
 
   function clearFilters(idTable)
   {
-    table = document.getElementById(idTable);
-    tr = table.getElementsByTagName("tr");
-
-    for (a = 0; a < tr.length; a++)
-      tr[a].style.display = "";
     document.getElementById('aDate').valueAsDate = new Date();
-    document.getElementById('aTime').value = "00:00";
+    document.getElementById('aTime').value = "";
+    tableFilter();
   }
+
+  function resizeTable(px)
+  {
+    var height = $(window).height();
+    $('#mainTable').height(height-px-($('#topBar').outerHeight()));
+  }
+  setInterval('resizeTable(120)',50);

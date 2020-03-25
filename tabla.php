@@ -118,18 +118,21 @@
             <div class="main-content p-t-10">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row p-t-25">
+                        <div class="row p-t-25" id="topBar">
                             <div class="col-md-12">
                                 <div class="table-data__tool m-b-0">
                                     <div class="table-data__tool-left">
                                         <div class="rs-select2--light rs-select2--md">
-                                            <input type="date" id="aDate" class="form-control">
+                                          <input type="date" id="aDate" onchange="tableFilter();" class="form-control">
                                         </div>
                                         <div class="rs-select2--light rs-select2--xsm">
-                                            <input type="time" id="aTime" value="00:00" class="form-control">
+                                            <input type="time" id="aTime" onchange="tableFilter();" class="form-control">
                                         </div>
                                         <div class="rs-select2--light rs-select2--xsm">
                                             <button class="btn btn-success" onclick="clearFilters('tBody');">Limpiar filtros</button>
+                                        </div>
+                                        <div class="rs-select2--light rs-select2--xsm">
+                                            <button class="btn btn-success" id="moreFiltersButton"><i class="zmdi zmdi-plus"></i></button>
                                         </div>
                                     </div>
                                     <div class="table-data__tool-right">
@@ -145,13 +148,32 @@
                                         </button>
                                     </div>
                                 </div>
+
+                                <div id="moreFilters" class="table-data__tool m-b-0 p-t-10">
+                                  <div class="table-data__tool-left">
+                                      <div class="rs-select2--light rs-select2--md">
+                                          <input type="date" id="bDate" onchange="tableFilter();" class="form-control">
+                                      </div>
+                                      <div class="rs-select2--light rs-select2--xsm">
+                                          <input type="time" id="bTime" onchange="tableFilter();" class="form-control">
+                                      </div>
+                                      <div class="form-check rs-select2--light">
+                                        <div class="checkbox">
+                                           <label for="checkbox" class="form-check-label">
+                                             <input type="checkbox" id="dateChackbox" onchange="tableFilter();" class="form-check-input">
+                                             <span id="labelChackbox" style="color:#000;"></span>
+                                           </label>
+                                        </div>
+                                      </div>
+                                  </div>
+                                </div>
                             </div>
                         </div>>
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE-->
                                 <div class="table-responsive table--no-card m-b-20">
-                                    <table class="table table-borderless table-striped table-earning text-center" id="tablaRegistros">
+                                    <table class="table main-table table-borderless table-striped table-earning text-center" id="tablaRegistros">
                                         <thead>
                                             <tr>
                                                 <th>Fecha</th>
@@ -161,18 +183,7 @@
                                                 <th>CH4</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tBody">
-                                            <?php
-                                              $date = "2020-02-14";
-                                              $tmp  = $DB->getAllValuesOf("Sensor1",$date);
-                                              $ch4  = $DB->getAllValuesOf("Sensor2",$date);
-                                              $co2  = $DB->getAllValuesOf("Sensor3",$date);
-                                              $n = count(min($tmp,$ch4,$co2)) - 1;
-                                              for($a=0; $a<$n; $a++)
-                                              {
-                                                echo "<tr><td>".date("d-m-Y",strtotime($tmp[$a]['fecha']))."</td><td>".date("h:i",strtotime($tmp[$a]['fecha']))."</td><td>".$tmp[$a]['valor']." °C</td><td>".$ch4[$a]['valor']." ppm</td><td>".$co2[$a]['valor']." ppm</td></tr>";
-                                              }
-                                            ?>
+                                        <tbody id="mainTable">
                                         </tbody>
                                     </table>
                                 </div>

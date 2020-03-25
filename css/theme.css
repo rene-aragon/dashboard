@@ -40,6 +40,33 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 /*                   GENERIC                           */
 /*-----------------------------------------------------*/
 /* ----- Normalize ----- */
+
+.main-table thead
+{
+  display: table;
+  width: 100%;
+}
+
+.main-table tbody
+{
+  display: block;
+  overflow-y: scroll;
+}
+
+.main-table th, td
+{
+  width: 20%;
+  padding: 5px;
+  word-break: break-all;
+}
+
+.main-table tr
+{
+  display: table;
+  width: 100%;
+}
+
+
 * {
     margin: 0;
     padding: 0;

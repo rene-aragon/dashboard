@@ -220,21 +220,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--?php
-                                $labelValues = ["13:00","13:30","14:00","14:30","15:00"];
-
-                                echo "<script type='text/javascript'> var dv_tmp =[]; var dv_ch4 = []; var dv_co2 = []; var lv = [];";
-                                for($a=0; $a<5; $a++)
-                                {
-                                    echo 'dv_tmp['.$a.'] = "'.$tmp[$a]['valor'].'";';
-                                    echo 'dv_ch4['.$a.'] = "'.$ch4[$a]['valor'].'";';
-                                    echo 'dv_co2['.$a.'] = "'.$co2[$a]['valor'].'";';
-                                    echo 'lv['.$a.'] = "'.$labelValues[$a].'";';
-                                }
-                                echo "updateChart(\"temp-chart\",lv,dv_tmp);";
-                                echo "updateChart(\"metano-chart\",lv,dv_ch4);";
-                                echo "updateChart(\"carbono-chart\",lv,dv_co2);</script>";
-                            ?-->
                         </div>
                         <div class="end">
                         </div>
