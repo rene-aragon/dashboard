@@ -50,9 +50,17 @@ function reloadChart(chartId, values)
   var limit = values.length/2;
   var labelValue = values.slice(0,limit);
   var dataValue  = values.slice(limit);
+  var dataLabel;
+
+  if(chartId == "Sensor1-chart")
+    dataLabel = "temperatura";
+  else
+    dataLabel = "ppm";
+
   try {
     var ctx = document.getElementById(chartId);
     if (ctx) {
+      ctx.innerHTML="";
       ctx.height = 150;
       var myChart = new Chart(ctx, {
         type: 'line',
@@ -61,7 +69,7 @@ function reloadChart(chartId, values)
           type: 'line',
           defaultFontFamily: 'Poppins',
           datasets: [{
-            label: "temperatura",
+            label: dataLabel,
             data: dataValue,
             backgroundColor: 'transparent',
             borderColor: 'rgba(220,53,69,0.75)',

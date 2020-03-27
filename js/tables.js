@@ -36,7 +36,7 @@ function exportTable()
 
   $("#moreFiltersButton").click(function()
   {
-    $("#moreFilters").toggle("slow");
+    $("#moreFilters").slideToggle();
   });
 
   $( document ).ready(function()
@@ -96,6 +96,7 @@ function exportTable()
   function resizeTable(px)
   {
     var height = $(window).height();
-    $('#mainTable').height(height-px-($('#topBar').outerHeight()));
+    px = height-px-($('#topBar').outerHeight());
+    $('#mainTable').css('max-height',px+'px');
   }
   setInterval('resizeTable(120)',50);

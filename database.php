@@ -25,6 +25,10 @@ class dataBase
         $s1 = $sensor1->fetch_assoc();
         $s2 = $sensor2->fetch_assoc();
         $s3 = $sensor3->fetch_assoc();
+
+        if(!($s1 AND $s2 AND $s3))
+          return "<tr><td>Sin resultados</td></tr>";
+
         while($s1 AND $s2 AND $s3)
         {
           $table .= "<tr><td>".date("d-m-Y",strtotime($s1['fecha']))."</td><td>".date("h:i",strtotime($s1['fecha']))."</td><td>".$s1['valor']." °C</td><td>".$s2['valor']." ppm</td><td>".$s3['valor']." ppm</td></tr>";
@@ -35,34 +39,6 @@ class dataBase
       }
 
       return $table;
-    }
-
-    public function getAllValuesOf($sensor, $date)
-    {
-      if($sensor == "allsensors")
-      {
-        $table = "";
-        $tmp  = $this->getAllValuesOf("Sensor1",$date);
-        $ch4  = $this->getAllValuesOf("Sensor2",$date);
-        $co2  = $this->getAllValuesOf("Sensor3",$date);
-        $n = count(min($tmp,$ch4,$co2)) - 1;
-
-        for($a=0; $a<$n; $a++)
-        {
-          $table .= "<tr><td>".date("d-m-Y",strtotime($tmp[$a]['fecha']))."</td><td>".date("h:i",strtotime($tmp[$a]['fecha']))."</td><td>".$tmp[$a]['valor']." °C</td><td>".$ch4[$a]['valor']." ppm</td><td>".$co2[$a]['valor']." ppm</td></tr>";
-        }
-        return $table;
-      }
-
-      if ($result = $this->mysqli->query("select * from sensores where idNombreS = '$sensor' and cast(fecha as date) = '$date' order by fecha desc"))
-      {
-        $i = 0;
-        while($values[$i] = $result->fetch_assoc())
-          $i++;
-
-        $result->close();
-        return $values;
-      }
     }
 
     public function getLastValueOf($sensor)

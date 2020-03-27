@@ -41,13 +41,12 @@
     ?>
 
     <!-- ChartJS -->
-    <script src="js/charts.js"></script>
     <script src="js/update.js"></script>
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
 
 </head>
-
-<body onload="updateAll();" class="animsition">
+<!---->
+<body  onload="updateAll();" class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
