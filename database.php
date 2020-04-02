@@ -5,7 +5,7 @@ class dataBase
 
     public function __construct()
     {
-      $this->mysqli = new mysqli("127.0.0.1", "rene", "rene", "registro");
+      $this->mysqli = new mysqli("localhost", "root", "", "pasaromorir");
       if ($this->mysqli->connect_errno)
       {
         echo"Falló la conexión: $this->mysqli->connect_error";
