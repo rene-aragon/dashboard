@@ -43,7 +43,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/logo.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -93,10 +93,12 @@
                             <a href="tabla.php">
                                 <i class="fas fa-table"></i>Tablas</a>
                         </li>
+<!--
                         <li>
                             <a href="grafica.php">
                                 <i class="fas fa-chart-bar"></i>Graficas</a>
                         </li>
+-->
                     </ul>
                 </nav>
             </div>
