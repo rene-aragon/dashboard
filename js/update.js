@@ -49,7 +49,7 @@ function reloadChart(chartId, values)
 {
   var limit = values.length/2;
   var labelValue = values.slice(0,limit);
-  var dataValue  = values.slice(limit);
+  var dataValue  = values.slice(limit+1);
   var dataLabel;
 
   if(chartId == "Sensor1-chart")
