@@ -1,6 +1,6 @@
 <?php
-  include 'database.php';
-  $DB = new dataBase();
+  include 'MyFirestore.php';
+  $DB = new MyFirestore();
 
   $f = $_REQUEST["f"];
   $p = $_REQUEST["p"];

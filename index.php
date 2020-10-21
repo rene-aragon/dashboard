@@ -36,17 +36,17 @@
 
     <!-- Database Connection -->
     <?php
-        include 'database.php';
-        $DB = new dataBase();
+        include 'MyFirestore.php';
+        $DB = new MyFirestore();
     ?>
 
     <!-- ChartJS -->
-    <script src="js/update.js"></script>
+    <!--script src="js/update.js"></script-->
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
 
 </head>
 <!---->
-<body  onload="updateAll();" class="animsition">
+<body  class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -136,7 +136,7 @@
                                             </div>
                                             <div class="text">
                                                 <h2 id="Sensor1">
-                                                    <?php echo $DB->getLastValueOf("Sensor1")." °C"; ?>
+                                                    <?php echo $DB->getLastValueOf("temperatura")." °C"; ?>
                                                 </h2>
                                                 <span>Temperatura</span>
                                             </div>
@@ -153,7 +153,7 @@
                                             </div>
                                             <div class="text">
                                                 <h2 id="Sensor2">
-                                                    <?php echo $DB->getLastValueOf("Sensor2")." ppm"; ?>
+                                                    <?php echo $DB->getLastValueOf("metano")." ppm"; ?>
                                                 </h2>
                                                 <span>CH4</span>
                                             </div>
@@ -170,7 +170,7 @@
                                             </div>
                                             <div class="text">
                                                 <h2 id="Sensor3">
-                                                    <?php echo $DB->getLastValueOf("Sensor3")." ppm"; ?>
+                                                    <?php echo $DB->getLastValueOf("co2")." ppm"; ?>
                                                 </h2>
                                                 <span>CO2</span>
                                             </div>
@@ -255,8 +255,13 @@
     <script src="vendor/select2/select2.min.js">
     </script>
 
-    <!-- Main JS-->
+    
+
+<!-- Main JS-->
     <script src="js/main.js"></script>
+
+<!-- Firebase -->
+    
 
 </body>
 

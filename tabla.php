@@ -36,8 +36,8 @@
 
     <!-- Database Connection -->
     <?php
-        include 'database.php';
-        $DB = new dataBase();
+        include 'MyFirestore.php';
+        $DB = new MyFirestore();
     ?>
 
 </head>
