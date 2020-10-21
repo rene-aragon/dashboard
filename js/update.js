@@ -1,15 +1,78 @@
 function updateAll()
 {
-  update("Sensor1",0);
-  update("Sensor2",0);
-  update("Sensor3",0);
-  update("db_tbody",1);
-  updateChart("Sensor1");
-  updateChart("Sensor2");
-  updateChart("Sensor3");
+  var req = new XMLHttpRequest();
+
+  req.onreadystatechange = function()
+  {
+    if (req.readyState == 4 && req.status == 200)
+    {
+      document.getElementById('db_tbody').innerHTML = req.responseText;
+
+      var lastValues = [];
+
+      $("table#startTable tr").each(function () 
+      {
+        var arrayOfThisRow = [];
+        var tableData = $(this).find('td');
+        if (tableData.length > 0) {
+          tableData.each(function () { arrayOfThisRow.push($(this).text()); });
+          lastValues.push(arrayOfThisRow);
+        }
+      });
+
+      //Update last temperature value
+      document.getElementById("temperatura").innerHTML = lastValues[0][2];
+      //Update last ch4 value
+      document.getElementById("metano").innerHTML = lastValues[0][3];
+      //Update last co2 value
+      document.getElementById("co2").innerHTML = lastValues[0][4];
+
+      var hours = []
+      for (a = 4; a >= 0; a--)
+        hours.push(lastValues[a][1])
+
+      console.log("[INFO] hours: " + hours);
+      //Update temperature chart
+      var data = []
+      for (a = 4; a >= 0; a--)
+        data.push((lastValues[a][2]).replace(" °C", ""))
+      updateChart("temperatura-chart",hours,data)
+
+      //Update metano chart
+      var data = []
+      for (a = 4; a >= 0; a--)
+        data.push((lastValues[a][3]).replace(" ppm", ""))
+      updateChart("metano-chart",hours,data)
+
+      //Update co2 chart
+      var data = []
+      for (a = 4; a >= 0; a--)
+        data.push((lastValues[a][4]).replace(" ppm", ""))
+      updateChart("co2-chart",hours,data)
+
+      date = lastValues[0][0].split('-');
+      hour = lastValues[0][1].split(':');
+      lastDate = new Date(date[2],date[1]-1,date[0],hour[0],hour[1],0)
+      today = new Date()
+      console.log("[INFO] lastDate: "+lastDate+" today: "+today+" Difference: "+(today-lastDate));
+      if(today-lastDate > 1800000)
+        document.getElementById("warning-message").style.display="block";
+      else
+        document.getElementById("warning-message").style.display="none";
+
+    }
+  }
+
+  req.open('GET', 'content.php?p=db_tbody&f=1', true);
+  req.send();
 }
 
-setInterval(function(){updateAll();}, 5000);
+function checkErrors()
+{
+  
+}
+
+setInterval(function(){updateAll();}, 1800000);//cada 30 mins.
 
 function update(id,func)
 {
@@ -25,34 +88,11 @@ function update(id,func)
   req.send();
 }
 
-function updateChart(sensor)
+function updateChart(chartId, labelValue, dataValue)
 {
-  var req = new XMLHttpRequest();
-
-  req.onreadystatechange = function()
-  {
-    if (req.readyState == 4 && req.status == 200)
-    {
-      var res = req.responseText;
-      var arr = res.split(",");
-      chartId = sensor+"-chart";
-
-      reloadChart(chartId,arr);
-    }
-  }
-
-  req.open('GET', 'content.php?p='+sensor+'&f=2', true);
-  req.send();
-}
-
-function reloadChart(chartId, values)
-{
-  var limit = values.length/2;
-  var labelValue = values.slice(0,limit);
-  var dataValue  = values.slice(limit+1);
   var dataLabel;
 
-  if(chartId == "Sensor1-chart")
+  if(chartId == "temperatura-chart")
     dataLabel = "temperatura";
   else
     dataLabel = "ppm";
@@ -147,3 +187,5 @@ function reloadChart(chartId, values)
     console.log(error);
   }
 }
+
+

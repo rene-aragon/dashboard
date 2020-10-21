@@ -1,7 +1,7 @@
 <?php
 
 putenv(
-    'GOOGLE_APPLICATION_CREDENTIALS=C:\xampp\htdocs\dashboard-firebase\firebaseconfig.json'
+    'GOOGLE_APPLICATION_CREDENTIALS=D:\Documentos\GitHub\dashboard\firebaseconfig.json'
     );
     require_once 'vendor/autoload.php';
     use Google\Cloud\Firestore\FirestoreClient;
@@ -100,6 +100,7 @@ class MyFirestore{
         foreach($snapshot as $user)
         {
             $table .= "<tr>
+            <td>".date("d-m-Y",strtotime($user['fecha']))."</td>
             <td>".date("h:i",strtotime($user['fecha']))."</td>
             <td>".$user['temperatura']." °C</td>
             <td>".$user['metano']." ppm</td>
@@ -113,7 +114,7 @@ class MyFirestore{
     {
         $db = new FirestoreClient();
         $usersRef = $db->collection('IndicesDeEntorno');
-        $snapshot = $usersRef->documents();
+        $snapshot = $usersRef->documents();   
         foreach ($snapshot as $user) {
             if (!empty($user[$sensor])) {
                 return $user[$sensor];
@@ -130,12 +131,13 @@ class MyFirestore{
 
             $table = "";
             $db = new FirestoreClient();
-            $usersRef = $db->collection('Sensores')->orderBy("fecha", "desc");
+            $usersRef = $db->collection('Sensores')->orderBy("fecha", "desc")->limit($n);
             $snapshot = $usersRef->documents();
             
             foreach($snapshot as $user)
             {
                 $table .= "<tr>
+                <td>".date("d-m-Y",strtotime($user['fecha']))."</td>
                 <td>".date("h:i",strtotime($user['fecha']))."</td>
                 <td>".$user['temperatura']." °C</td>
                 <td>".$user['metano']." ppm</td>
@@ -157,6 +159,8 @@ class MyFirestore{
             foreach($snapshot as $user)
             {
                 $values[$i] = $user[$sensor];
+                echo "<script>console.log('XD')</script>";
+
                 $i++;
                 if($i>=$n)
                 {
@@ -172,19 +176,22 @@ class MyFirestore{
     public function getChartValues($n,$sensor)//NOT OK
     {
         $db = new FirestoreClient();
-        $usersRef = $db->collection('Sensores').collection("Sensores").orderBy("fecha", "desc");
+        $usersRef = $db->collection('Sensores')->orderBy("fecha", "desc")->limit($n);
         $snapshot = $usersRef->documents();
-        $i=0;       
+        $i=0;
         foreach ($snapshot as $user) {
             if (!empty($user[$sensor])) {
-                $res[$i]=$user[$sensor];
+                $res[$i]=$user;
                 $i++;
             }
         }
-        for ($a=$n; $a >=0 ; $a--){ 
+
+        for ($a=$n-1; $a >=0 ; $a--)
             $val[] = date("h:i",strtotime($res[$a]['fecha']));
-            $val[] = $res[$a]['valor'];
-        }
+        
+        for ($a=$n-1; $a >=0 ; $a--)
+            $val[] = $res[$a][$sensor];
+        
         return implode(",",$val);        
     }
 

@@ -41,12 +41,12 @@
     ?>
 
     <!-- ChartJS -->
-    <!--script src="js/update.js"></script-->
+    <script src="js/update.js"></script>
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
 
 </head>
 <!---->
-<body  class="animsition">
+<body  onload="updateAll();" class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -135,8 +135,8 @@
                                                 <i class="fas fa-temperature-low"></i>
                                             </div>
                                             <div class="text">
-                                                <h2 id="Sensor1">
-                                                    <?php echo $DB->getLastValueOf("temperatura")." °C"; ?>
+                                                <h2 id="temperatura">
+                                                    0 °C<!--?php echo $DB->getLastValueOf("temperatura")." °C"; ?-->
                                                 </h2>
                                                 <span>Temperatura</span>
                                             </div>
@@ -152,8 +152,8 @@
                                                 <i class="fas fa-flask"></i>
                                             </div>
                                             <div class="text">
-                                                <h2 id="Sensor2">
-                                                    <?php echo $DB->getLastValueOf("metano")." ppm"; ?>
+                                                <h2 id="metano">
+                                                    0 ppm<!--?php echo $DB->getLastValueOf("metano")." ppm"; ?-->
                                                 </h2>
                                                 <span>CH4</span>
                                             </div>
@@ -169,8 +169,8 @@
                                                 <i class="fas fa-flask"></i>
                                             </div>
                                             <div class="text">
-                                                <h2 id="Sensor3">
-                                                    <?php echo $DB->getLastValueOf("co2")." ppm"; ?>
+                                                <h2 id="co2">
+                                                    0 ppm<!--?php echo $DB->getLastValueOf("co2")." ppm"; ?-->
                                                 </h2>
                                                 <span>CO2</span>
                                             </div>
@@ -182,9 +182,10 @@
                         <div class="row">
                             <div class="col">
                                 <div class="table-responsive table--no-card m-b-20">
-                                    <table class="table table-borderless table-striped table-earning text-center">
+                                    <table id="startTable"class="table table-borderless table-striped table-earning text-center">
                                         <thead>
                                             <tr>
+                                                <th>Fecha</th>
                                                 <th>Hora</th>
                                                 <th>Temp.</th>
                                                 <th>CH4</th>
@@ -196,6 +197,11 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div id="warning-message" class="au-card m-b-20" style="background: #ffeb3b;width: fit-content;height: 28px;PADDING: 3px 8px 5px 8px; display:none;">
+                                    <div style="color: black;">
+                                        <i class="fas fa-exclamation-triangle"></i> ADVERTENCIA: No se han detectado cambios en los ultimos 30 minutos, asegurese que los sensores estén activos.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -203,7 +209,7 @@
                                 <div class="au-card m-b-20">
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-40">Temperatura</h3>
-                                        <canvas id="Sensor1-chart"></canvas>
+                                        <canvas id="temperatura-chart"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +217,7 @@
                                 <div class="au-card m-b-20">
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-40">CH4</h3>
-                                        <canvas id="Sensor2-chart"></canvas>
+                                        <canvas id="metano-chart"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -219,7 +225,7 @@
                                 <div class="au-card m-b-20 pb-sm-80">
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-40">CO2</h3>
-                                        <canvas id="Sensor3-chart"></canvas>
+                                        <canvas id="co2-chart"></canvas>
                                     </div>
                                 </div>
                             </div>
