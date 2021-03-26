@@ -36,8 +36,8 @@
 
     <!-- Database Connection -->
     <?php
-        include 'database.php';
-        $DB = new dataBase();
+        include 'MyFirestore.php';
+        $DB = new MyFirestore();
     ?>
 
 </head>
@@ -185,6 +185,7 @@
                                                 <th>Temperatura</th>
                                                 <th>CO2</th>
                                                 <th>CH4</th>
+                                                <th>Humedad</th>
                                             </tr>
                                         </thead>
                                         <tbody id="mainTable">
