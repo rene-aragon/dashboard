@@ -178,7 +178,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="overview-item overview-item--c3">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="fas fa-flask"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2 id="humedad">
+                                                    0 ppm<!--?php echo $DB->getLastValueOf("co2")." ppm"; ?-->
+                                                </h2>
+                                                <span>Humedad</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col">
                                 <div class="table-responsive table--no-card m-b-20">
@@ -190,6 +208,7 @@
                                                 <th>Temp.</th>
                                                 <th>CH4</th>
                                                 <th>CO2</th>
+                                                <th>Humedad</th>
                                             </tr>
                                         </thead>
                                         <tbody id="db_tbody">
@@ -226,6 +245,14 @@
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-40">CO2</h3>
                                         <canvas id="co2-chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="au-card m-b-20 pb-sm-80">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2 m-b-40">CO2</h3>
+                                        <canvas id="humedad-chart"></canvas>
                                     </div>
                                 </div>
                             </div>

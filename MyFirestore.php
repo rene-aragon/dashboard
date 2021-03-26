@@ -104,8 +104,16 @@ class MyFirestore{
             <td>".date("h:i",strtotime($user['fecha']))."</td>
             <td>".$user['temperatura']." °C</td>
             <td>".$user['metano']." ppm</td>
-            <td>".$user['co2']." ppm</td>
+            <td>".$user['co2']." ppm</td>";
+            if (!empty($user['humedad'])) {
+            $table .="
+            <td>".$user['humedad']."</td>
             </tr>";
+            }else{
+            $table .="
+            <td> </td>
+            </tr>";
+            }
         }
         return $table;
     }
@@ -141,8 +149,16 @@ class MyFirestore{
                 <td>".date("h:i",strtotime($user['fecha']))."</td>
                 <td>".$user['temperatura']." °C</td>
                 <td>".$user['metano']." ppm</td>
-                <td>".$user['co2']." ppm</td>
-                </tr>";
+                <td>".$user['co2']." ppm</td>";
+                if (!empty($user['humedad'])) {
+                    $table .="
+                    <td>".$user['humedad']."</td>
+                    </tr>";
+                    }else{
+                    $table .="
+                    <td> </td>
+                    </tr>";
+                    }
                 $n = $n-1;
                 if($n<0){
                     return $table;

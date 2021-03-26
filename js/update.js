@@ -26,6 +26,8 @@ function updateAll()
       document.getElementById("metano").innerHTML = lastValues[0][3];
       //Update last co2 value
       document.getElementById("co2").innerHTML = lastValues[0][4];
+      //Update last Humedad value
+      document.getElementById("humedad").innerHTML = lastValues[0][5];
 
       var hours = []
       for (a = 4; a >= 0; a--)
@@ -49,7 +51,13 @@ function updateAll()
       for (a = 4; a >= 0; a--)
         data.push((lastValues[a][4]).replace(" ppm", ""))
       updateChart("co2-chart",hours,data,"ppm")
-
+//*
+      //Update humedad chart
+      var data = []
+      for (a = 4; a >= 0; a--)
+        data.push((lastValues[a][5]).replace(" ppm", ""))
+      updateChart("humedad-chart",hours,data,"ppm")
+//*/
       date = lastValues[0][0].split('-');
       hour = lastValues[0][1].split(':');
       lastDate = new Date(date[2],date[1]-1,date[0],hour[0],hour[1],0)
