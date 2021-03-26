@@ -36,19 +36,19 @@ function updateAll()
       var data = []
       for (a = 4; a >= 0; a--)
         data.push((lastValues[a][2]).replace(" °C", ""))
-      updateChart("temperatura-chart",hours,data)
+      updateChart("temperatura-chart",hours,data,"Temperatura °C")
 
       //Update metano chart
       var data = []
       for (a = 4; a >= 0; a--)
         data.push((lastValues[a][3]).replace(" ppm", ""))
-      updateChart("metano-chart",hours,data)
+      updateChart("metano-chart",hours,data,"ppm")
 
       //Update co2 chart
       var data = []
       for (a = 4; a >= 0; a--)
         data.push((lastValues[a][4]).replace(" ppm", ""))
-      updateChart("co2-chart",hours,data)
+      updateChart("co2-chart",hours,data,"ppm")
 
       date = lastValues[0][0].split('-');
       hour = lastValues[0][1].split(':');
@@ -88,7 +88,7 @@ function update(id,func)
   req.send();
 }
 
-function updateChart(chartId, labelValue, dataValue)
+function updateChart(chartId, labelValue, dataValue,unidadDeMedida)
 {
   var dataLabel;
 
@@ -163,7 +163,7 @@ function updateChart(chartId, labelValue, dataValue)
               },
               scaleLabel: {
                 display: true,
-                labelString: 'temperatura °C',
+                labelString: unidadDeMedida,
                 fontFamily: "Poppins"
 
               },
